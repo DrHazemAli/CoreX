@@ -1,0 +1,12 @@
+/**
+ * ============================================================================
+ * COREX: Use Cases Placeholder
+ * Description: Add your application use cases here
+ *
+ * Example structure:
+ * - user.usecase.ts - User-related operations
+ * - auth.usecase.ts - Authentication operations
+ * ============================================================================
+ */
+
+// Add your use case exports here

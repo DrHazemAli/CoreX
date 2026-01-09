@@ -1,0 +1,86 @@
+{
+  "project": "corex",
+  "version": "0.1.0",
+  "environment": "dev",
+  "enabled": false,
+  "auto_update": false,
+
+  "telemetry": {
+    "enabled": true,
+    "anonymize": true
+  },
+
+  "distributions": ["eu", "us"],
+  "distribution_strategy": "round_robin",
+  "agents": [
+    {
+      "id": "skytells-cognition",
+      "enabled": true,
+      "permissions": ["read", "write", "execute"],
+      "security": {
+        "encryption": "AES-256",
+        "access_control": ["agent-based", "role-based", "task-based"]
+      }
+    }
+  ],
+
+  "rules": {
+    "self-improve": {
+      "enabled": false,
+      "constraints": {
+        "rules": [],
+        "max_iterations": 0,
+        "temperature": 0.0
+      }
+    },
+
+    "observe": {
+      "enabled": true,
+      "interval": "5m",
+      "metrics": ["cpu", "memory", "latency"]
+    },
+
+    "self-maintain": {
+      "enabled": true,
+      "mode": "safe",
+      "rollback_on_failure": true
+    },
+
+    "permissions_gate": {
+      "mode": "auth",
+      "require_approval": true
+    },
+
+    "logging": {
+      "level": "info",
+      "rotation": "daily",
+      "path": "./logs/corex.log"
+    }
+  },
+
+  "limits": {
+    "max_concurrent_tasks": 5,
+    "max_memory_mb": 2048
+  },
+
+  "notifications": {
+    "on_failure": true,
+    "on_update": false,
+    "channels": ["email", "slack"]
+  },
+
+  "backup": {
+    "enabled": true,
+    "frequency": "weekly",
+    "retention_days": 30,
+    "path": "./backups/"
+  },
+
+  "scripts": {
+    "pre_task": ".cognition/scripts/pre_task.sh",
+    "post_task": ".cognition/scripts/post_task.sh",
+    "error_handler": ".cognition/scripts/error_handler.sh",
+    "maintenance": ".cognition/scripts/maintenance.sh",
+    "post_deployment": ".cognition/scripts/post_deployment.sh"
+  }
+}
