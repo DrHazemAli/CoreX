@@ -12,7 +12,7 @@
 
 # testing
 /coverage
-/kw
+/tests
 
 # next.js
 /.next/
